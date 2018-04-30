@@ -86,6 +86,16 @@ import java.util.concurrent.TimeUnit;
 
             driver.navigate().to(logincred.getLink());
 
+            try{
+                WebElement popUp;
+                new WebDriverWait(driver, 20).
+                        until(
+                                ExpectedConditions.
+                                        elementToBeClickable(popUp = driver.findElement(By.id("later-subscription-button")) ) );
+                popUp.click();}
+            catch(Exception e){
+                System.out.println("Popup did not occure");
+            }
 
             WebElement hlogin;
             new WebDriverWait(driver, 10).
@@ -137,16 +147,36 @@ import java.util.concurrent.TimeUnit;
             order.setPassword("Faks7724!?");
             order.setKeyword("cat food");
 
+            System.out.println("Driver is ready");
+
             driver.manage().window().maximize();
-            
+
+            System.out.println("Maximizing the window");
+
             driver.navigate().to(order.getLink());
 
+            System.out.println("Navigating to the page");
+
+            try{
+            WebElement popUp;
+            new WebDriverWait(driver, 20).
+                    until(
+                            ExpectedConditions.
+                                    elementToBeClickable(popUp = driver.findElement(By.id("later-subscription-button")) ) );
+            popUp.click();}
+            catch(Exception e){
+                System.out.println("Popup did not occure");
+            }
+
+            System.out.println("Navigating login page");
             WebElement hlogin;
             new WebDriverWait(driver, 10).
                     until(
                             ExpectedConditions.
                                     elementToBeClickable(hlogin = driver.findElement(By.id("H-Login")) ) );
             hlogin.click();
+
+            System.out.println("Entering login credentials");
 
             WebElement username;
             new WebDriverWait(driver, 10).
@@ -174,6 +204,8 @@ import java.util.concurrent.TimeUnit;
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+            System.out.println("Searching the item");
+
             WebElement searchbar;
             new WebDriverWait(driver, 10).
                     until(
@@ -194,6 +226,8 @@ import java.util.concurrent.TimeUnit;
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+            System.out.println("Opening item page");
+
             WebElement item;
             new WebDriverWait(driver, 10).
                     until(
@@ -203,6 +237,8 @@ import java.util.concurrent.TimeUnit;
             item.click();
 
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+            System.out.println("Adding into cart");
 
             WebElement addToCart;
             new WebDriverWait(driver, 10).
@@ -215,6 +251,8 @@ import java.util.concurrent.TimeUnit;
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
             assertTrue(driver.getTitle().contains("Sepetim"));
+
+            System.out.println("Closing the driver");
 
             driver.close();
         }
